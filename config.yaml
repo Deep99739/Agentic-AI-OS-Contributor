@@ -1,0 +1,20 @@
+# Agentic AI Contributor Configuration
+
+# LLM Model (supports any model via litellm)
+# Examples: claude-sonnet-4-20250514, gpt-4.1, gemini/gemini-2.5-pro, ollama/codellama
+model: "claude-sonnet-4-20250514"
+
+# Maximum tokens for LLM responses
+max_tokens: 8192
+
+# Number of candidate patches to generate
+candidates: 3
+
+# Working directory for cloned repos
+workspace: "./workspace"
+
+# Output directory for results
+output_dir: "./output"
+
+# Verbose logging
+verbose: false

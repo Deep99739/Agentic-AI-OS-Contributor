@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+venv/
+.venv/
+env/
+
+# Environment
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project
+workspace/
+output/
+
+# Assignment docs (not part of submission)
+Agentic AI for Contrinutor Open Source.md
+Take-Home Assignment- Build an Agentic AI Contributor for Open-Source Go Projects.md
+COMPLETE_IMPLEMENTATION_BLUEPRINT.md

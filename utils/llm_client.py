@@ -77,7 +77,7 @@ class LLMClient:
                 error_str = str(e).lower()
                 is_rate_limit = any(
                     kw in error_str
-                    for kw in ["rate limit", "429", "quota", "resource exhausted", "too many"]
+                    for kw in ["rate limit", "429", "quota", "resource exhausted", "too many", "503", "unavailable"]
                 )
 
                 if is_rate_limit and attempt < max_retries:

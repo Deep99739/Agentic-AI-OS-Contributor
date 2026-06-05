@@ -4,7 +4,9 @@ Main pipeline orchestrator. Runs all 5 phases sequentially.
 
 import os
 import json
+import shutil
 import time
+import subprocess
 from datetime import datetime
 
 from agent.ingest import Ingester
@@ -23,6 +25,9 @@ class Pipeline:
     def __init__(self, config: dict):
         self.config = config
         self.output_dir = config.get("output_dir", "./output")
+        # Clean output dir to prevent stale artifacts from previous runs
+        if os.path.exists(self.output_dir):
+            shutil.rmtree(self.output_dir)
         os.makedirs(self.output_dir, exist_ok=True)
 
     def run(self, issue_url: str) -> dict:
@@ -47,6 +52,24 @@ class Pipeline:
             issue_data = ingester.fetch_issue(issue_url)
             repo_path = ingester.clone_repo(issue_data["repo_url"])
 
+            # Ensure repo is on clean default branch (handles re-runs)
+            git_ops_init = GitOps(repo_path)
+            git_ops_init.stash_changes()
+            # Delete old fix branches if they exist
+            old_branch = f"fix/issue-{issue_data['number']}"
+            subprocess.run(
+                ["git", "checkout", "main"],
+                cwd=repo_path, capture_output=True
+            )
+            subprocess.run(
+                ["git", "checkout", "master"],
+                cwd=repo_path, capture_output=True
+            )
+            subprocess.run(
+                ["git", "branch", "-D", old_branch],
+                cwd=repo_path, capture_output=True
+            )
+
             log_step("INGEST", f"Issue #{issue_data['number']}: {issue_data['title']}")
             log_step("INGEST", f"Repository cloned to: {repo_path}")
 
@@ -55,6 +78,13 @@ class Pipeline:
 
             # ── PHASE 1b: REPO MAP ──────────────────────────
             log_step("REPO_MAP", "Generating repository structural map...")
+
+            # Ensure Go module dependencies are available
+            subprocess.run(
+                ["go", "mod", "download"],
+                cwd=repo_path, capture_output=True, timeout=120
+            )
+
             mapper = RepoMapper(repo_path)
             repo_map = mapper.generate_map()
 

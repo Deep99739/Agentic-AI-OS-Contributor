@@ -1,0 +1,363 @@
+## Repository File Tree
+
+./auth.go
+./auth_test.go
+./benchmarks_test.go
+./binding/binding.go
+./binding/binding_msgpack_test.go
+./binding/binding_nomsgpack.go
+./binding/binding_test.go
+./binding/bson.go
+./binding/default_validator.go
+./binding/default_validator_benchmark_test.go
+./binding/default_validator_test.go
+./binding/form.go
+./binding/form_mapping.go
+./binding/form_mapping_benchmark_test.go
+./binding/form_mapping_test.go
+./binding/header.go
+./binding/json.go
+./binding/json_test.go
+./binding/msgpack.go
+./binding/msgpack_test.go
+./binding/multipart_form_mapping.go
+./binding/multipart_form_mapping_test.go
+./binding/plain.go
+./binding/protobuf.go
+./binding/query.go
+./binding/toml.go
+./binding/toml_test.go
+./binding/uri.go
+./binding/validate_test.go
+./binding/xml.go
+./binding/xml_test.go
+./binding/yaml.go
+./binding/yaml_test.go
+./codec/json/api.go
+./codec/json/go_json.go
+./codec/json/json.go
+./codec/json/jsoniter.go
+./codec/json/sonic.go
+./context.go
+./context_appengine.go
+./context_file_test.go
+./context_test.go
+./debug.go
+./debug_test.go
+./deprecated.go
+./deprecated_test.go
+./doc.go
+./errors.go
+./errors_test.go
+./fs.go
+./fs_test.go
+./gin.go
+./ginS/gins.go
+./ginS/gins_test.go
+./gin_integration_test.go
+./gin_test.go
+./githubapi_test.go
+./internal/bytesconv/bytesconv.go
+./internal/bytesconv/bytesconv_test.go
+./internal/fs/fs.go
+./internal/fs/fs_test.go
+./logger.go
+./logger_test.go
+./middleware_test.go
+./mode.go
+./mode_test.go
+./path.go
+./path_test.go
+./recovery.go
+./recovery_test.go
+./render/bson.go
+./render/data.go
+./render/html.go
+./render/json.go
+./render/msgpack.go
+./render/pdf.go
+./render/protobuf.go
+./render/reader.go
+./render/reader_test.go
+./render/redirect.go
+./render/render.go
+./render/render_msgpack_test.go
+./render/render_test.go
+./render/text.go
+./render/toml.go
+./render/xml.go
+./render/yaml.go
+./response_writer.go
+./response_writer_test.go
+./routergroup.go
+./routergroup_test.go
+./routes_test.go
+./test_helpers.go
+./testdata/protoexample/test.pb.go
+./tree.go
+./tree_test.go
+./utils.go
+./utils_test.go
+./version.go
+
+## Exported Symbols (go doc)
+
+### github.com/gin-gonic/gin
+const MIMEJSON = binding.MIMEJSON ...
+const PlatformGoogleAppEngine = "X-Appengine-Remote-Addr" ...
+const DebugMode = "debug" ...
+const AuthProxyUserKey = "proxy_user"
+const AuthUserKey = "user"
+const BindKey = "_gin-gonic/gin/bindkey"
+const BodyBytesKey = "_gin-gonic/gin/bodybyteskey"
+const ContextKey = "_gin-gonic/gin/contextkey"
+const EnvGinMode = "GIN_MODE"
+const Version = "v1.12.0"
+var DebugPrintFunc func(format string, values ...any)
+var DebugPrintRouteFunc func(httpMethod, absolutePath, handlerName string, nuHandlers int)
+var DefaultErrorWriter io.Writer = os.Stderr
+var DefaultWriter io.Writer = os.Stdout
+func CreateTestContext(w http.ResponseWriter) (c *Context, r *Engine)
+func Dir(root string, listDirectory bool) http.FileSystem
+func DisableBindValidation()
+func DisableConsoleColor()
+func EnableJsonDecoderDisallowUnknownFields()
+func EnableJsonDecoderUseNumber()
+func ForceConsoleColor()
+func IsDebugging() bool
+func Mode() string
+func SetMode(value string)
+type Accounts map[string]string
+type Context struct{ ... }
+    func CreateTestContextOnly(w http.ResponseWriter, r *Engine) (c *Context)
+type ContextKeyType int
+    const ContextRequestKey ContextKeyType = 0
+type Engine struct{ ... }
+    func Default(opts ...OptionFunc) *Engine
+    func New(opts ...OptionFunc) *Engine
+type Error struct{ ... }
+type ErrorType uint64
+    const ErrorTypeBind ErrorType = 1 << 63 ...
+type H map[string]any
+type HandlerFunc func(*Context)
+    func BasicAuth(accounts Accounts) HandlerFunc
+    func BasicAuthForProxy(accounts Accounts, realm string) HandlerFunc
+    func BasicAuthForRealm(accounts Accounts, realm string) HandlerFunc
+    func Bind(val any) HandlerFunc
+    func CustomRecovery(handle RecoveryFunc) HandlerFunc
+    func CustomRecoveryWithWriter(out io.Writer, handle RecoveryFunc) HandlerFunc
+    func ErrorLogger() HandlerFunc
+    func ErrorLoggerT(typ ErrorType) HandlerFunc
+    func Logger() HandlerFunc
+    func LoggerWithConfig(conf LoggerConfig) HandlerFunc
+    func LoggerWithFormatter(f LogFormatter) HandlerFunc
+    func LoggerWithWriter(out io.Writer, notlogged ...string) HandlerFunc
+    func Recovery() HandlerFunc
+    func RecoveryWithWriter(out io.Writer, recovery ...RecoveryFunc) HandlerFunc
+    func WrapF(f http.HandlerFunc) HandlerFunc
+    func WrapH(h http.Handler) HandlerFunc
+type HandlersChain []HandlerFunc
+type IRouter interface{ ... }
+type IRoutes interface{ ... }
+type LogFormatter func(params LogFormatterParams) string
+type LogFormatterParams struct{ ... }
+type LoggerConfig struct{ ... }
+type Negotiate struct{ ... }
+type OnlyFilesFS struct{ ... }
+type OptionFunc func(*Engine)
+type Param struct{ ... }
+type Params []Param
+type RecoveryFunc func(c *Context, err any)
+type ResponseWriter interface{ ... }
+type RouteInfo struct{ ... }
+type RouterGroup struct{ ... }
+type RoutesInfo []RouteInfo
+type Skipper func(c *Context) bool
+
+### github.com/gin-gonic/gin/binding
+const MIMEJSON = "application/json" ...
+var JSON BindingBody = jsonBinding{} ...
+var ErrConvertMapStringSlice ...
+var ErrMultiFileHeader = errors.New("unsupported field type for multipart.FileHeader") ...
+var EnableDecoderDisallowUnknownFields = false
+var EnableDecoderUseNumber = false
+func MapFormWithTag(ptr any, form map[string][]string, tag string) error
+type BindUnmarshaler interface{ ... }
+type Binding interface{ ... }
+    func Default(method, contentType string) Binding
+type BindingBody interface{ ... }
+type BindingUri interface{ ... }
+type SliceValidationError []error
+type StructValidator interface{ ... }
+    var Validator StructValidator = &defaultValidator{}
+
+### github.com/gin-gonic/gin/codec/json
+const Package = "encoding/json"
+type Core interface{ ... }
+    var API Core
+type Decoder interface{ ... }
+type Encoder interface{ ... }
+
+### github.com/gin-gonic/gin/ginS
+func Any(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes
+func DELETE(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes
+func GET(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes
+func Group(relativePath string, handlers ...gin.HandlerFunc) *gin.RouterGroup
+func HEAD(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes
+func Handle(httpMethod, relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes
+func LoadHTMLFS(fs http.FileSystem, patterns ...string)
+func LoadHTMLFiles(files ...string)
+func LoadHTMLGlob(pattern string)
+func NoMethod(handlers ...gin.HandlerFunc)
+func NoRoute(handlers ...gin.HandlerFunc)
+func OPTIONS(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes
+func PATCH(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes
+func POST(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes
+func PUT(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes
+func Routes() gin.RoutesInfo
+func Run(addr ...string) (err error)
+func RunFd(fd int) (err error)
+func RunTLS(addr, certFile, keyFile string) (err error)
+func RunUnix(file string) (err error)
+func SetHTMLTemplate(templ *template.Template)
+func Static(relativePath, root string) gin.IRoutes
+func StaticFS(relativePath string, fs http.FileSystem) gin.IRoutes
+func StaticFile(relativePath, filepath string) gin.IRoutes
+func Use(middlewares ...gin.HandlerFunc) gin.IRoutes
+
+### github.com/gin-gonic/gin/internal/bytesconv
+func BytesToString(b []byte) string
+func StringToBytes(s string) []byte
+
+### github.com/gin-gonic/gin/internal/fs
+type FileSystem struct{ ... }
+
+### github.com/gin-gonic/gin/render
+func WriteJSON(w http.ResponseWriter, obj any) error
+func WriteMsgPack(w http.ResponseWriter, obj any) error
+func WriteString(w http.ResponseWriter, format string, data []any) (err error)
+type AsciiJSON struct{ ... }
+type BSON struct{ ... }
+type Data struct{ ... }
+type Delims struct{ ... }
+type HTML struct{ ... }
+type HTMLDebug struct{ ... }
+type HTMLProduction struct{ ... }
+type HTMLRender interface{ ... }
+type IndentedJSON struct{ ... }
+type JSON struct{ ... }
+type JsonpJSON struct{ ... }
+type MsgPack struct{ ... }
+type PDF struct{ ... }
+type ProtoBuf struct{ ... }
+type PureJSON struct{ ... }
+type Reader struct{ ... }
+type Redirect struct{ ... }
+type Render interface{ ... }
+type SecureJSON struct{ ... }
+type String struct{ ... }
+type TOML struct{ ... }
+type XML struct{ ... }
+type YAML struct{ ... }
+
+
+## README.md
+
+# Gin Web Framework
+
+<img align="right" width="159px" src="https://raw.githubusercontent.com/gin-gonic/logo/master/color.png">
+
+[![Build Status](https://github.com/gin-gonic/gin/actions/workflows/gin.yml/badge.svg?branch=master)](https://github.com/gin-gonic/gin/actions/workflows/gin.yml)
+[![Trivy Security Scan](https://github.com/gin-gonic/gin/actions/workflows/trivy-scan.yml/badge.svg)](https://github.com/gin-gonic/gin/actions/workflows/trivy-scan.yml)
+[![codecov](https://codecov.io/gh/gin-gonic/gin/branch/master/graph/badge.svg)](https://codecov.io/gh/gin-gonic/gin)
+[![Go Report Card](https://goreportcard.com/badge/github.com/gin-gonic/gin)](https://goreportcard.com/report/github.com/gin-gonic/gin)
+[![Go Reference](https://pkg.go.dev/badge/github.com/gin-gonic/gin?status.svg)](https://pkg.go.dev/github.com/gin-gonic/gin?tab=doc)
+[![Sourcegraph](https://sourcegraph.com/github.com/gin-gonic/gin/-/badge.svg)](https://sourcegraph.com/github.com/gin-gonic/gin?badge)
+[![Open Source Helpers](https://www.codetriage.com/gin-gonic/gin/badges/users.svg)](https://www.codetriage.com/gin-gonic/gin)
+[![Release](https://img.shields.io/github/release/gin-gonic/gin.svg?style=flat-square)](https://github.com/gin-gonic/gin/releases)
+
+## 📰 Gin 1.12.0 is now available!
+
+We're excited to announce the release of **[Gin 1.12.0](https://gin-gonic.com/en/blog/news/gin-1-12-0-release-announcement/)**! This release brings new features, performance improvements, and important bug fixes. Check out the [release announcement](https://gin-gonic.com/en/blog/news/gin-1-12-0-release-announcement/) on our official blog for the full details.
+
+---
+
+Gin is a high-performance HTTP web framework written in [Go](https://go.dev/). It provides a Martini-like API but with significantly better performance—up to 40 times faster—thanks to [httprouter](https://github.com/julienschmidt/httprouter). Gin is designed for building REST APIs, web applications, and microservices where speed and developer productivity are essential.
+
+**Why choose Gin?**
+
+Gin combines the simplicity of Express.js-style routing with Go's performance characteristics, making it ideal for:
+
+- Building high-throughput REST APIs
+- Developing microservices that need to handle many concurrent requests
+- Creating web applications that require fast response times
+- Prototyping web services quickly with minimal boilerplate
+
+**Gin's key features:**
+
+- **Zero allocation router** - Extremely memory-efficient routing with no heap allocations
+- **High performance** - Benchmarks show superior speed compared to other Go web frameworks
+- **Middleware support** - Extensible middleware system for authentication, logging, CORS, etc.
+- **Crash-free** - Built-in recovery middleware prevents panics from crashing your server
+- **JSON validation** - Automatic request/response JSON binding and validation
+- **Route grouping** - Organize related routes and apply common middleware
+- **Error management** - Centralized error handling and logging
+- **B
+
+## CONTRIBUTING.md
+
+# Contributing
+
+We welcome both issue reports and pull requests! Please follow these guidelines to help maintainers respond effectively.
+
+## Issues
+
+- **Before opening a new issue:**
+  - Use the search tool to check for existing issues or feature requests.
+  - Review existing issues and provide feedback or react to them.
+  - Use English for all communications — it is the language all maintainers read and write.
+  - For questions, configuration or deployment problems, please use the [Discussions Forum](https://github.com/gin-gonic/gin/discussions).
+  - For bug reports involving sensitive security issues, email <appleboy.tw@gmail.com> instead of posting publicly.
+
+- **Reporting a bug:**
+  - Please provide a clear description of your issue, and a minimal reproducible code example if possible.
+  - Include the Gin version (or commit reference), Go version, and operating system.
+  - Indicate whether you can reproduce the bug and describe steps to do so.
+  - Attach relevant logs per [Logging Documentation](https://docs.gitea.com/administration/logging-config#collecting-logs-for-help).
+
+- **Feature requests:**
+  - Before opening a request, check that a similar idea hasn’t already been suggested.
+  - Clearly describe your proposed feature and its benefits.
+
+_For API Documentation, User Guides, and more, see:_
+
+- [Go.dev API Documentation](https://pkg.go.dev/github.com/gin-gonic/gin)
+- [Gin User Guides](https://gin-gonic.com/)
+- [Discussions Forum](https://github.com/gin-gonic/gin/discussions)
+
+## Pull Requests
+
+Please ensure your pull request meets the following requirements:
+
+- Open your pull request against the `master` branch.
+- Your pull request should have no more than two commits — squash them if necessary.
+- All tests pass in available continuous integration systems (e.g., GitHub Actions).
+- Add or modify tests to cover your code changes.
+- If your pull request introduces a new feature, document it in [`docs/doc.md`](docs/doc.md), not in the README.
+- Follow the checklist in the [Pull Request Template](.github/PULL_REQUEST_TEMPLATE.md).
+
+Thank you for contributing!
+
+
+## .github/PULL_REQUEST_TEMPLATE.md
+
+# Pull Request Checklist
+
+Please ensure your pull request meets the following requirements:
+
+- [ ] Open your pull request against the `master` branch.
+- [ ] All tests pass in available continuous integration systems (e.g., GitHub Actions).
+- [ ] Tests are added or modified as needed to cover code changes.
+- [ ] If the pull request introduces a new feature, the feature is documented in the `docs/doc.md`.
+
+Thank you for contributing!

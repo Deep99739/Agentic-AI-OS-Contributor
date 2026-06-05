@@ -43,6 +43,14 @@ def fetch_github_issue(owner: str, repo: str, issue_number: int) -> dict:
     # Fetch the issue
     url = f"https://api.github.com/repos/{owner}/{repo}/issues/{issue_number}"
     resp = requests.get(url, headers=headers, timeout=30)
+
+    # If token is invalid, retry without it (public repos work unauthenticated)
+    if resp.status_code == 401 and token:
+        import sys
+        print("[WARN] GITHUB_TOKEN is invalid/expired. Retrying without auth...", file=sys.stderr)
+        headers.pop("Authorization", None)
+        resp = requests.get(url, headers=headers, timeout=30)
+
     resp.raise_for_status()
     issue = resp.json()
 

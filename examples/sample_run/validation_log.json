@@ -1,0 +1,25 @@
+[
+  {
+    "gofmt": {
+      "passed": true,
+      "output": "formatted (auto-fixed)"
+    },
+    "build": {
+      "passed": true,
+      "output": "",
+      "exit_code": 0
+    },
+    "vet": {
+      "passed": true,
+      "output": "go: downloading github.com/stretchr/testify v1.11.1\ngo: downloading github.com/json-iterator/go v1.1.12\ngo: downloading github.com/modern-go/reflect2 v1.0.2\ngo: downloading gopkg.in/yaml.v3 v3.0.1\ngo: downloading github.com/pmezard/go-difflib v1.0.0\ngo: downloading github.com/davecgh/go-spew v1.1.1\ngo: downloading github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd\n",
+      "exit_code": 0
+    },
+    "test": {
+      "passed": true,
+      "output": "ok  \tgithub.com/gin-gonic/gin\t0.821s\nok  \tgithub.com/gin-gonic/gin/binding\t1.847s\n?   \tgithub.com/gin-gonic/gin/codec/json\t[no test files]\nok  \tgithub.com/gin-gonic/gin/ginS\t1.309s\nok  \tgithub.com/gin-gonic/gin/internal/bytesconv\t3.794s\nok  \tgithub.com/gin-gonic/gin/internal/fs\t2.487s\nok  \tgithub.com/gin-gonic/gin/render\t3.167s\n",
+      "exit_code": 0
+    },
+    "score": 10,
+    "candidate_index": 0
+  }
+]

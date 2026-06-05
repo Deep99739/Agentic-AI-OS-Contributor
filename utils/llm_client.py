@@ -35,6 +35,7 @@ class LLMClient:
         user_prompt: str,
         system_prompt: str = None,
         temperature: float = 0.0,
+        max_retries: int = 3,
     ) -> str:
         """
         Send a chat completion request.
@@ -43,10 +44,13 @@ class LLMClient:
             user_prompt: The main prompt / instruction.
             system_prompt: Optional system-level instruction.
             temperature: Sampling temperature (0.0 = deterministic).
+            max_retries: Number of retries on rate limit errors.
 
         Returns:
             The model's text response.
         """
+        import time
+
         messages = []
 
         if system_prompt:
@@ -57,17 +61,30 @@ class LLMClient:
         prompt_chars = len(user_prompt) + (len(system_prompt) if system_prompt else 0)
         log.debug(f"LLM call: model={self.model}, ~{prompt_chars} chars, temp={temperature}")
 
-        try:
-            response = litellm.completion(
-                model=self.model,
-                messages=messages,
-                temperature=temperature,
-                max_tokens=self.max_tokens,
-            )
-            content = response.choices[0].message.content
-            log.debug(f"LLM response: {len(content)} chars")
-            return content
+        for attempt in range(max_retries + 1):
+            try:
+                response = litellm.completion(
+                    model=self.model,
+                    messages=messages,
+                    temperature=temperature,
+                    max_tokens=self.max_tokens,
+                )
+                content = response.choices[0].message.content
+                log.debug(f"LLM response: {len(content)} chars")
+                return content
 
-        except Exception as e:
-            log.error(f"LLM call failed: {e}")
-            raise
+            except Exception as e:
+                error_str = str(e).lower()
+                is_rate_limit = any(
+                    kw in error_str
+                    for kw in ["rate limit", "429", "quota", "resource exhausted", "too many"]
+                )
+
+                if is_rate_limit and attempt < max_retries:
+                    wait_time = 30 * (attempt + 1)  # 30s, 60s, 90s
+                    log.warning(f"Rate limited. Waiting {wait_time}s before retry {attempt+1}/{max_retries}...")
+                    time.sleep(wait_time)
+                    continue
+
+                log.error(f"LLM call failed: {e}")
+                raise

@@ -1,0 +1,86 @@
+[
+  {
+    "phase": "INGEST",
+    "message": "Fetching issue and cloning repository...",
+    "timestamp": "2026-06-05T02:00:02.788239",
+    "data": null
+  },
+  {
+    "phase": "INGEST",
+    "message": "Issue #3942: verifying github.com/gin-gonic/gin@v1.8.0: checksum mismatch, how to fix it?",
+    "timestamp": "2026-06-05T02:00:04.993609",
+    "data": null
+  },
+  {
+    "phase": "INGEST",
+    "message": "Repository cloned to: ./workspace/gin-gonic_gin",
+    "timestamp": "2026-06-05T02:00:04.993789",
+    "data": null
+  },
+  {
+    "phase": "REPO_MAP",
+    "message": "Generating repository structural map...",
+    "timestamp": "2026-06-05T02:00:04.994170",
+    "data": null
+  },
+  {
+    "phase": "REPO_MAP",
+    "message": "Repo map generated (14002 chars)",
+    "timestamp": "2026-06-05T02:00:18.713669",
+    "data": null
+  },
+  {
+    "phase": "LOCALIZE",
+    "message": "Localizing relevant files and code elements...",
+    "timestamp": "2026-06-05T02:00:18.713732",
+    "data": null
+  },
+  {
+    "phase": "LOCALIZE",
+    "message": "Found 5 relevant files",
+    "timestamp": "2026-06-05T02:01:35.172325",
+    "data": null
+  },
+  {
+    "phase": "REPAIR",
+    "message": "Generating 3 candidate patches...",
+    "timestamp": "2026-06-05T02:01:35.172388",
+    "data": null
+  },
+  {
+    "phase": "REPAIR",
+    "message": "Generated 3 candidate patches",
+    "timestamp": "2026-06-05T02:02:07.671200",
+    "data": null
+  },
+  {
+    "phase": "VALIDATE",
+    "message": "Validating candidate patches...",
+    "timestamp": "2026-06-05T02:02:07.671232",
+    "data": null
+  },
+  {
+    "phase": "VALIDATE",
+    "message": "Selected best patch (score: 10)",
+    "timestamp": "2026-06-05T02:02:23.944004",
+    "data": null
+  },
+  {
+    "phase": "PR_GEN",
+    "message": "Generating pull request summary...",
+    "timestamp": "2026-06-05T02:02:23.963521",
+    "data": null
+  },
+  {
+    "phase": "PR_GEN",
+    "message": "Created branch: fix/issue-3942",
+    "timestamp": "2026-06-05T02:02:38.672617",
+    "data": null
+  },
+  {
+    "phase": "DONE",
+    "message": "Pipeline completed in 155.9s",
+    "timestamp": "2026-06-05T02:02:38.672638",
+    "data": null
+  }
+]

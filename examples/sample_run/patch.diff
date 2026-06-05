@@ -1,0 +1,22 @@
+diff --git a/gin.go b/gin.go
+index 2e033bf..e0a4aca 100644
+--- a/gin.go
++++ b/gin.go
+@@ -92,6 +92,9 @@ const (
+ type Engine struct {
+ 	RouterGroup
+ 
++	// FrameworkVersion is the current gin framework's version.
++	FrameworkVersion string
++
+ 	// routeTreesUpdated ensures that the initialization or update of the route trees
+ 	// (used for routing HTTP requests) happens only once, even if called multiple times concurrently.
+ 	routeTreesUpdated sync.Once
+@@ -207,6 +210,7 @@ func New(opts ...OptionFunc) *Engine {
+ 			basePath: "/",
+ 			root:     true,
+ 		},
++		FrameworkVersion:       Version, // Initialize with the current framework version
+ 		FuncMap:                template.FuncMap{},
+ 		RedirectTrailingSlash:  true,
+ 		RedirectFixedPath:      false,

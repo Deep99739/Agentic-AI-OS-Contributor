@@ -1,0 +1,14 @@
+{
+  "url": "https://github.com/gin-gonic/gin/issues/3942",
+  "owner": "gin-gonic",
+  "repo_name": "gin",
+  "repo_url": "https://github.com/gin-gonic/gin.git",
+  "number": 3942,
+  "title": "verifying github.com/gin-gonic/gin@v1.8.0: checksum mismatch, how to fix it?",
+  "body": "verifying github.com/gin-gonic/gin@v1.8.0: checksum mismatch \tdownloaded: h1:gcAUpegZ91QWGm03w0CjjJ0+rjxmG3pbBbT0aiT82s8= \tgo.sum:     h1:4WFH5yycBMA3za5Hnl425yd9ymdw1XPm4666oab+hv4=  SECURITY ERROR This download does NOT match an earlier download recorded in go.sum. The bits may have been replaced on the origin server, or an attacker may have intercepted the download attempt.  For more information, see 'go help module-auth'.",
+  "labels": [],
+  "comments": [
+    "**@RedCrazyGhost**: Please upgrade to the latest version: github.com/gin-gonic/gin v1.9.1",
+    "**@appleboy**: Please upgrade to v1.10.0 version for security issue."
+  ]
+}

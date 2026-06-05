@@ -61,7 +61,7 @@ class Localizer:
         prompt = FILE_LOCALIZATION_PROMPT.format(
             repo_map=repo_map[:20000],  # Truncate if massive
             issue_title=issue_data["title"],
-            issue_body=issue_data["body"][:5000],
+            issue_body=(issue_data.get("body") or "")[:5000],
             grep_hints=grep_results[:3000],
         )
 
@@ -91,7 +91,7 @@ class Localizer:
 
         prompt = ELEMENT_LOCALIZATION_PROMPT.format(
             issue_title=issue_data["title"],
-            issue_body=issue_data["body"][:3000],
+            issue_body=(issue_data.get("body") or "")[:3000],
             file_contents=condensed[:50000],
         )
 
@@ -100,7 +100,7 @@ class Localizer:
 
     def _extract_keywords(self, issue_data: dict) -> list:
         """Extract likely code keywords (CamelCase, snake_case) from issue text."""
-        text = f"{issue_data['title']} {issue_data['body']}"
+        text = f"{issue_data['title']} {issue_data.get('body') or ''}"
         
         # 1. Dotted paths or CamelCase: "Context.Next", "ShouldBindJSON"
         identifiers = re.findall(r"\b[A-Z][a-zA-Z0-9]*(?:\.[A-Z][a-zA-Z0-9]*)*\b", text)

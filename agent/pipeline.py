@@ -79,11 +79,14 @@ class Pipeline:
             # ── PHASE 1b: REPO MAP ──────────────────────────
             log_step("REPO_MAP", "Generating repository structural map...")
 
-            # Ensure Go module dependencies are available
-            subprocess.run(
-                ["go", "mod", "download"],
-                cwd=repo_path, capture_output=True, timeout=120
-            )
+            # Ensure Go module dependencies are available (non-fatal)
+            try:
+                subprocess.run(
+                    ["go", "mod", "download"],
+                    cwd=repo_path, capture_output=True, timeout=180
+                )
+            except Exception:
+                log.warning("go mod download failed or timed out. Continuing...")
 
             mapper = RepoMapper(repo_path)
             repo_map = mapper.generate_map()

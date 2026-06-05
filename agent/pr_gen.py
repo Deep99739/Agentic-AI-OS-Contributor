@@ -45,7 +45,7 @@ class PRGenerator:
         prompt = PR_SUMMARY_PROMPT.format(
             issue_number=issue_data["number"],
             issue_title=issue_data["title"],
-            issue_body=issue_data["body"][:3000],
+            issue_body=(issue_data.get("body") or "")[:3000],
             diff=diff[:10000],  # Truncate very large diffs
             pr_template=pr_template,
             contributing_guidelines=contributing,

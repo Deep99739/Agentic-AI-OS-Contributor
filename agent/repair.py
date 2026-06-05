@@ -43,7 +43,7 @@ class Repairer:
 
             prompt = REPAIR_PROMPT.format(
                 issue_title=issue_data["title"],
-                issue_body=issue_data["body"][:5000],
+                issue_body=(issue_data.get("body") or "")[:5000],
                 element_analysis=localization.get("elements", "")[:3000],
                 file_contents=file_contents_str[:40000],  # ~10k tokens max
                 repo_map_snippet=repo_map[:5000],

@@ -1,0 +1,239 @@
+## Repository File Tree
+
+./active_help.go
+./active_help_test.go
+./args.go
+./args_test.go
+./bash_completions.go
+./bash_completionsV2.go
+./bash_completionsV2_test.go
+./bash_completions_test.go
+./cobra.go
+./cobra_test.go
+./command.go
+./command_notwin.go
+./command_test.go
+./command_win.go
+./completions.go
+./completions_test.go
+./doc/cmd_test.go
+./doc/man_docs.go
+./doc/man_docs_test.go
+./doc/man_examples_test.go
+./doc/md_docs.go
+./doc/md_docs_test.go
+./doc/rest_docs.go
+./doc/rest_docs_test.go
+./doc/util.go
+./doc/yaml_docs.go
+./doc/yaml_docs_test.go
+./fish_completions.go
+./fish_completions_test.go
+./flag_groups.go
+./flag_groups_test.go
+./powershell_completions.go
+./powershell_completions_test.go
+./shell_completions.go
+./zsh_completions.go
+./zsh_completions_test.go
+
+## Exported Symbols (go doc)
+
+### github.com/spf13/cobra
+const BashCompFilenameExt = "cobra_annotation_bash_completion_filename_extensions" ...
+const FlagSetByCobraAnnotation = "cobra_annotation_flag_set_by_cobra" ...
+const ShellCompRequestCmd = "__complete" ...
+var EnableCaseInsensitive = defaultCaseInsensitive
+var EnableCommandSorting = defaultCommandSorting
+var EnablePrefixMatching = defaultPrefixMatching
+var EnableTraverseRunHooks = defaultTraverseRunHooks
+var MousetrapDisplayDuration = 5 * time.Second
+var MousetrapHelpText = ...
+func AddTemplateFunc(name string, tmplFunc interface{})
+func AddTemplateFuncs(tmplFuncs template.FuncMap)
+func ArbitraryArgs(cmd *Command, args []string) error
+func CheckErr(msg interface{})
+func CompDebug(msg string, printToStdErr bool)
+func CompDebugln(msg string, printToStdErr bool)
+func CompError(msg string)
+func CompErrorln(msg string)
+func Eq(a interface{}, b interface{}) bool
+func GetActiveHelpConfig(cmd *Command) string
+func Gt(a interface{}, b interface{}) bool
+func MarkFlagCustom(flags *pflag.FlagSet, name string, f string) error
+func MarkFlagDirname(flags *pflag.FlagSet, name string) error
+func MarkFlagFilename(flags *pflag.FlagSet, name string, extensions ...string) error
+func MarkFlagRequired(flags *pflag.FlagSet, name string) error
+func NoArgs(cmd *Command, args []string) error
+func NoDuplicateArgs(cmd *Command, args []string) error
+func NoFileCompletions(cmd *Command, args []string, toComplete string) ([]Completion, ShellCompDirective)
+func OnFinalize(y ...func())
+func OnInitialize(y ...func())
+func OnlyValidArgs(cmd *Command, args []string) error
+func WriteStringAndCheck(b io.StringWriter, s string)
+type Command struct{ ... }
+type Completion = string
+    func AppendActiveHelp(compArray []Completion, activeHelpStr string) []Completion
+    func CompletionWithDesc(choice string, description string) Completion
+type CompletionFunc = func(cmd *Command, args []string, toComplete string) ([]Completion, ShellCompDirective)
+    func FixedCompletions(choices []Completion, directive ShellCompDirective) CompletionFunc
+type CompletionOptions struct{ ... }
+type FParseErrWhitelist flag.ParseErrorsAllowlist
+type Group struct{ ... }
+type PositionalArgs func(cmd *Command, args []string) error
+    func ExactArgs(n int) PositionalArgs
+    func ExactValidArgs(n int) PositionalArgs
+    func MatchAll(pargs ...PositionalArgs) PositionalArgs
+    func MaximumNArgs(n int) PositionalArgs
+    func MinimumNArgs(n int) PositionalArgs
+    func RangeArgs(min int, max int) PositionalArgs
+type ShellCompDirective int
+    const ShellCompDirectiveError ShellCompDirective = 1 << iota ...
+type SliceValue interface{ ... }
+
+### github.com/spf13/cobra/doc
+func GenMan(cmd *cobra.Command, header *GenManHeader, w io.Writer) error
+func GenManTree(cmd *cobra.Command, header *GenManHeader, dir string) error
+func GenManTreeFromOpts(cmd *cobra.Command, opts GenManTreeOptions) error
+func GenMarkdown(cmd *cobra.Command, w io.Writer) error
+func GenMarkdownCustom(cmd *cobra.Command, w io.Writer, linkHandler func(string) string) error
+func GenMarkdownTree(cmd *cobra.Command, dir string) error
+func GenMarkdownTreeCustom(cmd *cobra.Command, dir string, filePrepender, linkHandler func(string) string) error
+func GenReST(cmd *cobra.Command, w io.Writer) error
+func GenReSTCustom(cmd *cobra.Command, w io.Writer, linkHandler func(string, string) string) error
+func GenReSTTree(cmd *cobra.Command, dir string) error
+func GenReSTTreeCustom(cmd *cobra.Command, dir string, filePrepender func(string) string, ...) error
+func GenYaml(cmd *cobra.Command, w io.Writer) error
+func GenYamlCustom(cmd *cobra.Command, w io.Writer, linkHandler func(string) string) error
+func GenYamlTree(cmd *cobra.Command, dir string) error
+func GenYamlTreeCustom(cmd *cobra.Command, dir string, filePrepender, linkHandler func(string) string) error
+type GenManHeader struct{ ... }
+type GenManTreeOptions struct{ ... }
+
+
+## README.md
+
+<div align="center">
+<a href="https://cobra.dev">
+<img width="512" height="535" alt="cobra-logo" src="https://github.com/user-attachments/assets/c8bf9aad-b5ae-41d3-8899-d83baec10af8" />
+</a>
+</div>
+
+Cobra is a library for creating powerful modern CLI applications.
+
+<a href="https://cobra.dev">Visit Cobra.dev for extensive documentation</a> 
+
+
+Cobra is used in many Go projects such as [Kubernetes](https://kubernetes.io/),
+[Hugo](https://gohugo.io), and [GitHub CLI](https://github.com/cli/cli) to
+name a few. [This list](site/content/projects_using_cobra.md) contains a more extensive list of projects using Cobra.
+
+[![](https://img.shields.io/github/actions/workflow/status/spf13/cobra/test.yml?branch=main&longCache=true&label=Test&logo=github%20actions&logoColor=fff)](https://github.com/spf13/cobra/actions?query=workflow%3ATest)
+[![Go Reference](https://pkg.go.dev/badge/github.com/spf13/cobra.svg)](https://pkg.go.dev/github.com/spf13/cobra)
+[![Go Report Card](https://goreportcard.com/badge/github.com/spf13/cobra)](https://goreportcard.com/report/github.com/spf13/cobra)
+[![Slack](https://img.shields.io/badge/Slack-cobra-brightgreen)](https://gophers.slack.com/archives/CD3LP1199)
+<hr>
+<div align="center" markdown="1">
+   <sup>Supported by:</sup>
+   <br>
+   <br>
+   <a href="https://www.warp.dev/cobra">
+      <img alt="Warp sponsorship" width="400" src="https://github.com/user-attachments/assets/ab8dd143-b0fd-4904-bdc5-dd7ecac94eae">
+   </a>
+
+### [Warp, the AI terminal for devs](https://www.warp.dev/cobra)
+[Try Cobra in Warp today](https://www.warp.dev/cobra)<br>
+
+</div>
+<hr>
+
+# Overview
+
+Cobra is a library providing a simple interface to create powerful modern CLI
+interfaces similar to git & go tools.
+
+Cobra provides:
+* Easy subcommand-based CLIs: `app server`, `app fetch`, etc.
+* Fully POSIX-compliant flags (including short & long versions)
+* Nested subcommands
+* Global, local and cascading flags
+* Intelligent suggestions (`app srver`... did you mean `app server`?)
+* Automatic help generation for commands and flags
+* Grouping help for subcommands
+* Automatic help flag recognition of `-h`, `--help`, etc.
+* Automatically generated shell autocomplete for your application (bash, zsh, fish, powershell)
+* Automatically generated man pages for your application
+* Command aliases so you can change things without breaking them
+* The flexibility to define your own help, usage, etc.
+* Optional seamless integration with [viper](https://github.com/spf13/viper) for 12-factor apps
+
+# Concepts
+
+Cobra is built on a structure of commands, arguments & flags.
+
+**Commands** represent actions, **Args** are things and **Flags** are modifiers for those actions.
+
+The best applications read like sentences when used, and as a result, users
+intuitively know how to interact with them.
+
+The pattern to follow is
+`APPNAME VERB NOUN --ADJECTIVE`
+    or
+`APPNAME COMMAND ARG --FLAG`.
+
+A few good real world examples may better illustrate this point.
+
+In the following example, 'server' is 
+
+## CONTRIBUTING.md
+
+# Contributing to Cobra
+
+Thank you so much for contributing to Cobra. We appreciate your time and help.
+Here are some guidelines to help you get started.
+
+## Code of Conduct
+
+Be kind and respectful to the members of the community. Take time to educate
+others who are seeking help. Harassment of any kind will not be tolerated.
+
+## Questions
+
+If you have questions regarding Cobra, feel free to ask it in the community
+[#cobra Slack channel][cobra-slack]
+
+## Filing a bug or feature
+
+1. Before filing an issue, please check the existing issues to see if a
+   similar one was already opened. If there is one already opened, feel free
+   to comment on it.
+1. If you believe you've found a bug, please provide detailed steps of
+   reproduction, the version of Cobra and anything else you believe will be
+   useful to help troubleshoot it (e.g. OS environment, environment variables,
+   etc...). Also state the current behavior vs. the expected behavior.
+1. If you'd like to see a feature or an enhancement please open an issue with
+   a clear title and description of what the feature is and why it would be
+   beneficial to the project and its users.
+
+## Submitting changes
+
+1. CLA: Upon submitting a Pull Request (PR), contributors will be prompted to
+   sign a CLA. Please sign the CLA :slightly_smiling_face:
+1. Tests: If you are submitting code, please ensure you have adequate tests
+   for the feature. Tests can be run via `go test ./...` or `make test`.
+1. Since this is golang project, ensure the new code is properly formatted to
+   ensure code consistency. Run `make all`.
+
+### Quick steps to contribute
+
+1. Fork the project.
+1. Download your fork to your PC (`git clone https://github.com/your_username/cobra && cd cobra`)
+1. Create your feature branch (`git checkout -b my-new-feature`)
+1. Make changes and run tests (`make test`)
+1. Add them to staging (`git add .`)
+1. Commit your changes (`git commit -m 'Add some feature'`)
+1. Push to the branch (`git push origin my-new-feature`)
+1. Create new pull request
+
+<!-- Links -->
+[cobra-slack]: https://gophers.slack.com/archives/CD3LP1199

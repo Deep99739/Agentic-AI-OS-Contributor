@@ -1,0 +1,17 @@
+{
+  "url": "https://github.com/spf13/cobra/issues/2122",
+  "owner": "spf13",
+  "repo_name": "cobra",
+  "repo_url": "https://github.com/spf13/cobra.git",
+  "number": 2122,
+  "title": "chore: remove repetitive words",
+  "body": null,
+  "labels": [
+    "area/docs-generation",
+    "kind/cleanup",
+    "lgtm"
+  ],
+  "comments": [
+    "**@CLAassistant**: [![CLA assistant check](https://cla-assistant.io/pull/badge/signed)](https://cla-assistant.io/spf13/cobra?pullRequest=2122) <br/>All committers have signed the CLA."
+  ]
+}

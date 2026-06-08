@@ -1,6 +1,7 @@
 """
 Phase 2: Localize the relevant files and code elements for the issue.
 Uses a two-stage LLM approach: file-level retrieval → element-level localization.
+Falls back to keyword grep when LLM localization returns empty results.
 """
 
 import os
@@ -30,6 +31,13 @@ class Localizer:
         # --- Stage 1: File-level localization ---
         files = self._localize_files(issue_data, repo_map)
         log.info(f"File localization identified {len(files)} files: {', '.join(files)}")
+
+        # Fallback: if LLM returned nothing, use keyword grep results
+        if not files:
+            log.warning("LLM file localization returned 0 files. Falling back to keyword grep...")
+            files = self._fallback_grep_localization(issue_data)
+            if files:
+                log.info(f"Grep fallback found {len(files)} files: {', '.join(files)}")
 
         # Read the identified files
         file_contents = {}
@@ -66,6 +74,7 @@ class Localizer:
         )
 
         response = self.llm.chat(prompt)
+        log.debug(f"LLM file localization raw response:\n{response[:1000]}")
         files = self._parse_file_list(response)
 
         # Validate that files actually exist in the repo
@@ -76,18 +85,25 @@ class Localizer:
             full_path = os.path.join(self.repo_path, f)
             if os.path.exists(full_path) and f.endswith(".go"):
                 valid_files.append(f)
+            else:
+                log.debug(f"File not found in repo, skipping: {f}")
+
+        if not valid_files and files:
+            log.warning(f"LLM suggested {len(files)} files but none exist in repo: {files[:5]}")
 
         # Limit to top 7 files to avoid blowing up context window later
         return valid_files[:7]
 
     def _localize_elements(self, issue_data: dict, file_contents: dict) -> str:
         """Use LLM to identify specific functions/structs to modify."""
-        # Build a condensed view of file contents
+        # Build a condensed view of file contents with line numbers
         condensed = ""
         for fpath, content in file_contents.items():
             condensed += f"\n\n--- FILE: {fpath} ---\n"
-            # Hard limit per file (10,000 chars ~ 2500 tokens)
-            condensed += content[:10000]
+            # Add line numbers for precise element identification
+            lines = content.split("\n")
+            numbered = "\n".join(f"{i+1:4d}: {line}" for i, line in enumerate(lines[:300]))
+            condensed += numbered
 
         prompt = ELEMENT_LOCALIZATION_PROMPT.format(
             issue_title=issue_data["title"],
@@ -109,20 +125,23 @@ class Localizer:
         # 3. Backtick-quoted code (usually the most accurate)
         backtick_code = re.findall(r"`([^`\s]+)`", text)
         identifiers += backtick_code
+        # 4. Function calls in code blocks: funcName(
+        identifiers += re.findall(r"\b([a-zA-Z_][a-zA-Z0-9_]*)\s*\(", text)
 
         # Filter out common English words that look like identifiers
-        filtered = [i for i in identifiers if len(i) > 3]
+        stop_words = {"Description", "Problem", "Expected", "Version", "Environment",
+                      "Source", "Code", "Error", "Operating", "System", "Linux", "Ubuntu"}
+        filtered = [i for i in identifiers if len(i) > 2 and i not in stop_words]
         
         counter = Counter(filtered)
         # Return top 15 most common keywords
         return [word for word, _ in counter.most_common(15)]
 
     def _grep_keywords(self, keywords: list) -> str:
-        """Run ripgrep (or standard grep) for keyword occurrences."""
+        """Run grep for keyword occurrences in Go source files."""
         results = []
         for kw in keywords[:10]:
             try:
-                # Use standard grep for broad compatibility
                 result = subprocess.run(
                     ["grep", "-rl", "--include=*.go", kw, "."],
                     cwd=self.repo_path,
@@ -133,7 +152,6 @@ class Localizer:
                 if result.stdout.strip():
                     # Take only the first 5 matching files
                     files = result.stdout.strip().split("\n")[:5]
-                    # Clean paths
                     files = [f.lstrip("./") for f in files]
                     results.append(f"Keyword '{kw}' found in: {', '.join(files)}")
             except Exception:
@@ -141,15 +159,47 @@ class Localizer:
                 
         return "\n".join(results)
 
+    def _fallback_grep_localization(self, issue_data: dict) -> list:
+        """Fallback: use keyword grep to find likely relevant files when LLM fails."""
+        keywords = self._extract_keywords(issue_data)
+        file_scores = Counter()
+
+        for kw in keywords[:10]:
+            try:
+                result = subprocess.run(
+                    ["grep", "-rl", "--include=*.go", kw, "."],
+                    cwd=self.repo_path,
+                    capture_output=True,
+                    text=True,
+                    timeout=5,
+                )
+                if result.stdout.strip():
+                    for f in result.stdout.strip().split("\n"):
+                        f = f.lstrip("./")
+                        # Exclude test files and vendor
+                        if f.endswith(".go") and "_test.go" not in f and "vendor/" not in f:
+                            file_scores[f] += 1
+            except Exception:
+                pass
+
+        # Return top 5 files by keyword match count
+        top_files = [f for f, _ in file_scores.most_common(5)]
+        return top_files
+
     def _parse_file_list(self, response: str) -> list:
-        """Parse file paths from LLM response line-by-line."""
+        """Parse file paths from LLM response. Handles various formats."""
         files = []
         for line in response.split("\n"):
             line = line.strip()
-            if line.endswith(".go"):
-                # Remove common list prefixes ("- ", "1. ", "* ", etc)
-                cleaned = re.sub(r"^[\d\.\-\*\s]+", "", line).strip()
-                cleaned = cleaned.strip("`").strip('"').strip("'")
-                if cleaned:
+            if not line:
+                continue
+
+            # Try to extract .go file paths from the line
+            # Match patterns like: path/to/file.go, `path/to/file.go`, - path/to/file.go
+            go_path_match = re.search(r'([a-zA-Z0-9_\-./]+\.go)', line)
+            if go_path_match:
+                cleaned = go_path_match.group(1)
+                if cleaned and cleaned not in files:
                     files.append(cleaned)
+
         return files

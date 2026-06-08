@@ -51,6 +51,11 @@ def main():
         help="Path to config file (default: config.yaml)",
     )
     parser.add_argument(
+        "--commit",
+        default=None,
+        help="Git commit SHA to checkout before running (e.g., parent of a known fix for testing)",
+    )
+    parser.add_argument(
         "--verbose",
         action="store_true",
         help="Enable verbose debug logging",
@@ -70,9 +75,13 @@ def main():
     if "model" not in config:
         config["model"] = "claude-sonnet-4-20250514"
 
-    config["candidates"] = args.candidates
+    # CLI --candidates overrides config only when explicitly passed
+    if args.candidates != 3 or "candidates" not in config:
+        config["candidates"] = args.candidates
     config["output_dir"] = args.output_dir
     config["verbose"] = args.verbose
+    if args.commit:
+        config["checkout_commit"] = args.commit
 
     setup_logger(verbose=args.verbose)
 

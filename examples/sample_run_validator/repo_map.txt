@@ -1,0 +1,230 @@
+## Repository File Tree
+
+./_examples/custom-validation/main.go
+./_examples/custom/main.go
+./_examples/dive/main.go
+./_examples/gin-upgrading-overriding/main.go
+./_examples/gin-upgrading-overriding/v8_to_v9.go
+./_examples/http-transalations/main.go
+./_examples/map-validation/main.go
+./_examples/simple/main.go
+./_examples/struct-level/main.go
+./_examples/struct-map-rules-validation/main.go
+./_examples/translations/main.go
+./_examples/validate_fn/enum_enumer.go
+./_examples/validate_fn/main.go
+./_examples/valuer/main.go
+./baked_in.go
+./benchmarks_test.go
+./cache.go
+./country_codes.go
+./currency_codes.go
+./doc.go
+./errors.go
+./field_level.go
+./language_codes.go
+./no_validate_fn.go
+./non-standard/validators/notblank.go
+./non-standard/validators/notblank_test.go
+./options.go
+./postcode_regexes.go
+./regexes.go
+./struct_level.go
+./testdata/a.go
+./translations.go
+./translations/ar/ar.go
+./translations/ar/ar_test.go
+./translations/de/de.go
+./translations/de/de_test.go
+./translations/en/en.go
+./translations/en/en_test.go
+./translations/es/es.go
+./translations/es/es_test.go
+./translations/fa/fa.go
+./translations/fa/fa_test.go
+./translations/fr/fr.go
+./translations/fr/fr_test.go
+./translations/id/id.go
+./translations/id/id_test.go
+./translations/it/it.go
+./translations/it/it_test.go
+./translations/ja/ja.go
+./translations/ja/ja_test.go
+./translations/ko/ko.go
+./translations/ko/ko_test.go
+./translations/lv/lv.go
+./translations/lv/lv_test.go
+./translations/nl/nl.go
+./translations/nl/nl_test.go
+./translations/pl/pl.go
+./translations/pl/pl_test.go
+./translations/pt/pt.go
+./translations/pt/pt_test.go
+./translations/pt_BR/pt_BR.go
+./translations/pt_BR/pt_BR_test.go
+./translations/ru/ru.go
+./translations/ru/ru_test.go
+./translations/th/th.go
+./translations/th/th_test.go
+./translations/tr/tr.go
+./translations/tr/tr_test.go
+./translations/uk/uk.go
+./translations/uk/uk_test.go
+./translations/vi/vi.go
+./translations/vi/vi_test.go
+./translations/zh/zh.go
+./translations/zh/zh_test.go
+./translations/zh_tw/zh_tw.go
+./translations/zh_tw/zh_tw_test.go
+./util.go
+./validate_fn.go
+./validator.go
+./validator_instance.go
+./validator_test.go
+
+## Exported Symbols (go doc)
+
+### github.com/go-playground/validator/v10
+type CustomTypeFunc func(field reflect.Value) interface{}
+type FieldError interface{ ... }
+type FieldLevel interface{ ... }
+type FilterFunc func(ns []byte) bool
+type Func func(fl FieldLevel) bool
+type FuncCtx func(ctx context.Context, fl FieldLevel) bool
+type InvalidValidationError struct{ ... }
+type Option func(*Validate)
+    func WithPrivateFieldValidation() Option
+    func WithRequiredStructEnabled() Option
+    func WithTagNameFuncBlankOmit() Option
+type RegisterTranslationsFunc func(ut ut.Translator) error
+type StructLevel interface{ ... }
+type StructLevelFunc func(sl StructLevel)
+type StructLevelFuncCtx func(ctx context.Context, sl StructLevel)
+type TagNameFunc func(field reflect.StructField) string
+type TranslationFunc func(ut ut.Translator, fe FieldError) string
+type Validate struct{ ... }
+    func New(options ...Option) *Validate
+type ValidationErrors []FieldError
+type ValidationErrorsTranslations map[string]string
+type Valuer interface{ ... }
+
+### github.com/go-playground/validator/v10/non-standard/validators
+func NotBlank(fl validator.FieldLevel) bool
+
+### github.com/go-playground/validator/v10/translations/ar
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/de
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/en
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/es
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/fa
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/fr
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/id
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/it
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/ja
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/ko
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/lv
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/nl
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/pl
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/pt
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/pt_BR
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/ru
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/th
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+### github.com/go-playground/validator/v10/translations/tr
+func RegisterDefaultTranslations(v *validator.Validate, trans ut.Translator) (err error)
+
+
+## README.md
+
+Package validator
+=================
+<img align="right" src="logo.png">[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/go-playground/validator)](https://github.com/go-playground/validator/releases)
+[![Build Status](https://github.com/go-playground/validator/actions/workflows/workflow.yml/badge.svg)](https://github.com/go-playground/validator/actions)
+[![Coverage Status](https://coveralls.io/repos/go-playground/validator/badge.svg?branch=master&service=github)](https://coveralls.io/github/go-playground/validator?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/go-playground/validator)](https://goreportcard.com/report/github.com/go-playground/validator)
+[![GoDoc](https://godoc.org/github.com/go-playground/validator?status.svg)](https://pkg.go.dev/github.com/go-playground/validator/v10)
+![License](https://img.shields.io/dub/l/vibe-d.svg)
+
+Package validator implements value validations for structs and individual fields based on tags.
+
+It has the following **unique** features:
+
+-   Cross Field and Cross Struct validations by using validation tags or custom validators.
+-   Slice, Array and Map diving, which allows any or all levels of a multidimensional field to be validated.
+-   Ability to dive into both map keys and values for validation
+-   Handles type interface by determining it's underlying type prior to validation.
+-   Handles custom field types such as sql driver [Valuer](https://golang.org/src/database/sql/driver/types.go?s=1210:1293#L29) and the [Valuer interface](https://github.com/go-playground/validator/blob/master/_examples/valuer/main.go)
+-   Alias validation tags, which allows for mapping of several validations to a single tag for easier defining of validations on structs
+-   Extraction of custom defined Field Name e.g. can specify to extract the JSON name while validating and have it available in the resulting FieldError
+-   Customizable i18n aware error messages.
+-   Default validator for the [gin](https://github.com/gin-gonic/gin) web framework; upgrading from v8 to v9 in gin see [here](https://github.com/go-playground/validator/tree/master/_examples/gin-upgrading-overriding)
+
+A Call for Maintainers
+----------------------
+
+Please read the discussion started [here](https://github.com/go-playground/validator/discussions/1330) if you are interested in contributing/helping maintain this package.
+
+Installation
+------------
+
+Use go get.
+
+	go get github.com/go-playground/validator/v10
+
+Then import the validator package into your own code.
+
+	import "github.com/go-playground/validator/v10"
+
+Error Return Value
+-------
+
+Validation functions return type error
+
+They return type error to avoid the issue discussed in the following, where err is always != nil:
+
+* http://stackoverflow.com/a/29138676/3158232
+* https://github.com/go-playground/validator/issues/134
+
+Validator returns only InvalidValidationError for bad validation input, nil or ValidationErrors as type error; so, in your code all you n
+
+## .github/PULL_REQUEST_TEMPLATE.md
+
+## Fixes Or Enhances
+
+
+**Make sure that you've checked the boxes below before you submit PR:**
+- [ ] Tests exist or have been written that cover this particular change.
+
+@go-playground/validator-maintainers

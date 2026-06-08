@@ -52,8 +52,8 @@ class Ingester:
     def clone_repo(self, repo_url: str) -> str:
         """Clone the repository. Returns path to cloned repo."""
         # Extract repo name from URL
-        repo_name = repo_url.rstrip(".git").split("/")[-1]
-        owner = repo_url.rstrip(".git").split("/")[-2]
+        repo_name = repo_url.removesuffix(".git").split("/")[-1]
+        owner = repo_url.removesuffix(".git").split("/")[-2]
         repo_path = os.path.join(self.workspace, f"{owner}_{repo_name}")
 
         if os.path.exists(repo_path):

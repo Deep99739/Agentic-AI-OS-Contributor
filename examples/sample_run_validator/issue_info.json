@@ -1,0 +1,13 @@
+{
+  "url": "https://github.com/go-playground/validator/issues/1237",
+  "owner": "go-playground",
+  "repo_name": "validator",
+  "repo_url": "https://github.com/go-playground/validator.git",
+  "number": 1237,
+  "title": "Fix: panic in struct level example",
+  "body": "Accessing an array element at index 3 causes index out of range panic\r\n\r\n## Fixes Or Enhances\r\n\r\n\r\n**Make sure that you've checked the boxes below before you submit PR:**\r\n- [x] Tests exist or have been written that cover this particular change.\r\n\r\n@go-playground/validator-maintainers",
+  "labels": [],
+  "comments": [
+    "**@coveralls**: \n[![Coverage Status](https://coveralls.io/builds/65918887/badge)](https://coveralls.io/builds/65918887)\n\ncoverage: 74.172%. remained the same\nwhen pulling **709d4cc020d37315f809854a77f72f78db197228 on parviz-yu:master**\ninto **b328f72e15814aba56e018c06675b8d679ad6e90 on go-playground:master**.\n"
+  ]
+}

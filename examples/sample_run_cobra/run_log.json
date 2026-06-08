@@ -1,0 +1,86 @@
+[
+  {
+    "phase": "INGEST",
+    "message": "Fetching issue and cloning repository...",
+    "timestamp": "2026-06-05T16:07:09.688042",
+    "data": null
+  },
+  {
+    "phase": "INGEST",
+    "message": "Issue #2122: chore: remove repetitive words",
+    "timestamp": "2026-06-05T16:07:12.297005",
+    "data": null
+  },
+  {
+    "phase": "INGEST",
+    "message": "Repository cloned to: ./workspace/spf13_cobra",
+    "timestamp": "2026-06-05T16:07:12.297074",
+    "data": null
+  },
+  {
+    "phase": "REPO_MAP",
+    "message": "Generating repository structural map...",
+    "timestamp": "2026-06-05T16:07:12.297257",
+    "data": null
+  },
+  {
+    "phase": "REPO_MAP",
+    "message": "Repo map generated (9840 chars)",
+    "timestamp": "2026-06-05T16:07:12.431498",
+    "data": null
+  },
+  {
+    "phase": "LOCALIZE",
+    "message": "Localizing relevant files and code elements...",
+    "timestamp": "2026-06-05T16:07:12.431548",
+    "data": null
+  },
+  {
+    "phase": "LOCALIZE",
+    "message": "Found 5 relevant files",
+    "timestamp": "2026-06-05T16:08:04.321788",
+    "data": null
+  },
+  {
+    "phase": "REPAIR",
+    "message": "Generating 3 candidate patches...",
+    "timestamp": "2026-06-05T16:08:04.321856",
+    "data": null
+  },
+  {
+    "phase": "REPAIR",
+    "message": "Generated 3 candidate patches",
+    "timestamp": "2026-06-05T16:10:02.665101",
+    "data": null
+  },
+  {
+    "phase": "VALIDATE",
+    "message": "Validating candidate patches...",
+    "timestamp": "2026-06-05T16:10:02.665138",
+    "data": null
+  },
+  {
+    "phase": "VALIDATE",
+    "message": "Selected best patch (score: 5)",
+    "timestamp": "2026-06-05T16:10:18.774790",
+    "data": null
+  },
+  {
+    "phase": "PR_GEN",
+    "message": "Generating pull request summary...",
+    "timestamp": "2026-06-05T16:10:18.798271",
+    "data": null
+  },
+  {
+    "phase": "PR_GEN",
+    "message": "Created branch: fix/issue-2122",
+    "timestamp": "2026-06-05T16:11:05.200463",
+    "data": null
+  },
+  {
+    "phase": "DONE",
+    "message": "Pipeline completed in 235.5s",
+    "timestamp": "2026-06-05T16:11:05.200481",
+    "data": null
+  }
+]

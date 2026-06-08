@@ -1,0 +1,13 @@
+diff --git a/_examples/struct-level/main.go b/_examples/struct-level/main.go
+index a0cdf54..ed726cc 100644
+--- a/_examples/struct-level/main.go
++++ b/_examples/struct-level/main.go
+@@ -37,7 +37,7 @@ func (gender Gender) String() string {
+ 	if gender < Male || gender > Intersex {
+ 		return "unknown"
+ 	}
+-	return terms[gender]
++	return terms[gender-1]
+ }
+ 
+ // User contains user information

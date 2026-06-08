@@ -1,0 +1,71 @@
+[
+  {
+    "gofmt": {
+      "passed": true,
+      "output": "ok"
+    },
+    "build": {
+      "passed": true,
+      "output": "",
+      "exit_code": 0
+    },
+    "vet": {
+      "passed": true,
+      "output": "",
+      "exit_code": 0
+    },
+    "test": {
+      "passed": false,
+      "output": "dyld[12742]: missing LC_UUID load command in /private/var/folders/3n/6td7c2ld4ns2yswpxd54drqr0000gn/T/go-build2922020235/b080/cobra.test\ndyld[12742]: missing LC_UUID load command\nsignal: abort trap\nFAIL\tgithub.com/spf13/cobra\t0.527s\ndyld[12743]: missing LC_UUID load command in /private/var/folders/3n/6td7c2ld4ns2yswpxd54drqr0000gn/T/go-build2922020235/b106/doc.test\ndyld[12743]: missing LC_UUID load command\nsignal: abort trap\nFAIL\tgithub.com/spf13/cobra/doc\t1.006s\nFAIL\n",
+      "exit_code": 1
+    },
+    "score": 5,
+    "candidate_index": 0
+  },
+  {
+    "gofmt": {
+      "passed": true,
+      "output": "ok"
+    },
+    "build": {
+      "passed": true,
+      "output": "",
+      "exit_code": 0
+    },
+    "vet": {
+      "passed": true,
+      "output": "",
+      "exit_code": 0
+    },
+    "test": {
+      "passed": false,
+      "output": "dyld[12832]: missing LC_UUID load command in /private/var/folders/3n/6td7c2ld4ns2yswpxd54drqr0000gn/T/go-build3642305096/b080/cobra.test\ndyld[12832]: missing LC_UUID load command\nsignal: abort trap\nFAIL\tgithub.com/spf13/cobra\t0.702s\ndyld[12833]: missing LC_UUID load command in /private/var/folders/3n/6td7c2ld4ns2yswpxd54drqr0000gn/T/go-build3642305096/b106/doc.test\ndyld[12833]: missing LC_UUID load command\nsignal: abort trap\nFAIL\tgithub.com/spf13/cobra/doc\t0.211s\nFAIL\n",
+      "exit_code": 1
+    },
+    "score": 5,
+    "candidate_index": 1
+  },
+  {
+    "gofmt": {
+      "passed": true,
+      "output": "ok"
+    },
+    "build": {
+      "passed": true,
+      "output": "",
+      "exit_code": 0
+    },
+    "vet": {
+      "passed": true,
+      "output": "",
+      "exit_code": 0
+    },
+    "test": {
+      "passed": false,
+      "output": "dyld[12920]: missing LC_UUID load command in /private/var/folders/3n/6td7c2ld4ns2yswpxd54drqr0000gn/T/go-build917698501/b080/cobra.test\ndyld[12920]: missing LC_UUID load command\nsignal: abort trap\nFAIL\tgithub.com/spf13/cobra\t1.106s\ndyld[12919]: missing LC_UUID load command in /private/var/folders/3n/6td7c2ld4ns2yswpxd54drqr0000gn/T/go-build917698501/b106/doc.test\ndyld[12919]: missing LC_UUID load command\nsignal: abort trap\nFAIL\tgithub.com/spf13/cobra/doc\t1.254s\nFAIL\n",
+      "exit_code": 1
+    },
+    "score": 5,
+    "candidate_index": 2
+  }
+]

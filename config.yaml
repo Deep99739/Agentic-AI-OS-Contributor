@@ -1,14 +1,20 @@
 # Agentic AI Contributor Configuration
 
 # LLM Model (supports any model via litellm)
-# Examples: claude-sonnet-4-20250514, gpt-4.1, gemini/gemini-2.5-pro, ollama/codellama
-model: "claude-sonnet-4-20250514"
+# Free options:
+#   groq/llama-3.3-70b-versatile  (Groq — free, fast, recommended)
+#   groq/llama-3.1-8b-instant     (Groq — free, fastest)
+# Paid options:
+#   claude-sonnet-4-20250514           (Anthropic Claude)
+#   gpt-4.1                       (OpenAI)
+#   gemini/gemini-2.5-pro         (Google Gemini)
+model: "gemini/gemini-2.5-flash"
 
 # Maximum tokens for LLM responses
 max_tokens: 8192
 
-# Number of candidate patches to generate
-candidates: 3
+# Number of candidate patches to generate (more = better diversity)
+candidates: 5
 
 # Working directory for cloned repos
 workspace: "./workspace"

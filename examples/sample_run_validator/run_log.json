@@ -1,0 +1,86 @@
+[
+  {
+    "phase": "INGEST",
+    "message": "Fetching issue and cloning repository...",
+    "timestamp": "2026-06-05T16:07:29.876821",
+    "data": null
+  },
+  {
+    "phase": "INGEST",
+    "message": "Issue #1237: Fix: panic in struct level example",
+    "timestamp": "2026-06-05T16:07:33.415110",
+    "data": null
+  },
+  {
+    "phase": "INGEST",
+    "message": "Repository cloned to: ./workspace/go-playground_validator",
+    "timestamp": "2026-06-05T16:07:33.415206",
+    "data": null
+  },
+  {
+    "phase": "REPO_MAP",
+    "message": "Generating repository structural map...",
+    "timestamp": "2026-06-05T16:07:33.415412",
+    "data": null
+  },
+  {
+    "phase": "REPO_MAP",
+    "message": "Repo map generated (9240 chars)",
+    "timestamp": "2026-06-05T16:08:25.447737",
+    "data": null
+  },
+  {
+    "phase": "LOCALIZE",
+    "message": "Localizing relevant files and code elements...",
+    "timestamp": "2026-06-05T16:08:25.447783",
+    "data": null
+  },
+  {
+    "phase": "LOCALIZE",
+    "message": "Found 5 relevant files",
+    "timestamp": "2026-06-05T16:08:51.703958",
+    "data": null
+  },
+  {
+    "phase": "REPAIR",
+    "message": "Generating 3 candidate patches...",
+    "timestamp": "2026-06-05T16:08:51.704021",
+    "data": null
+  },
+  {
+    "phase": "REPAIR",
+    "message": "Generated 3 candidate patches",
+    "timestamp": "2026-06-05T16:09:06.041848",
+    "data": null
+  },
+  {
+    "phase": "VALIDATE",
+    "message": "Validating candidate patches...",
+    "timestamp": "2026-06-05T16:09:06.041893",
+    "data": null
+  },
+  {
+    "phase": "VALIDATE",
+    "message": "Selected best patch (score: 10)",
+    "timestamp": "2026-06-05T16:09:23.370187",
+    "data": null
+  },
+  {
+    "phase": "PR_GEN",
+    "message": "Generating pull request summary...",
+    "timestamp": "2026-06-05T16:09:23.392729",
+    "data": null
+  },
+  {
+    "phase": "PR_GEN",
+    "message": "Created branch: fix/issue-1237",
+    "timestamp": "2026-06-05T16:09:59.873470",
+    "data": null
+  },
+  {
+    "phase": "DONE",
+    "message": "Pipeline completed in 150.0s",
+    "timestamp": "2026-06-05T16:09:59.873491",
+    "data": null
+  }
+]

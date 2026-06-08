@@ -1,0 +1,44 @@
+diff --git a/command.go b/command.go
+index c05fed4..5032295 100644
+--- a/command.go
++++ b/command.go
+@@ -12,8 +12,8 @@
+ // See the License for the specific language governing permissions and
+ // limitations under the License.
+ 
+-// Package cobra is a commander providing a simple interface to create powerful modern CLI interfaces.
+-// In addition to providing an interface, Cobra simultaneously provides a controller to organize your application code.
++// Package cobra provides a simple interface to create powerful modern CLI applications,
++// and acts as a controller to organize your application code.
+ package cobra
+ 
+ import (
+@@ -126,23 +126,23 @@ type Command struct {
+ 	//
+ 	// PersistentPreRun: children of this command will inherit and execute.
+ 	PersistentPreRun func(cmd *Command, args []string)
+-	// PersistentPreRunE: PersistentPreRun but returns an error.
++	// PersistentPreRunE: Like PersistentPreRun, but returns an error.
+ 	PersistentPreRunE func(cmd *Command, args []string) error
+ 	// PreRun: children of this command will not inherit.
+ 	PreRun func(cmd *Command, args []string)
+-	// PreRunE: PreRun but returns an error.
++	// PreRunE: Like PreRun, but returns an error.
+ 	PreRunE func(cmd *Command, args []string) error
+ 	// Run: Typically the actual work function. Most commands will only implement this.
+ 	Run func(cmd *Command, args []string)
+-	// RunE: Run but returns an error.
++	// RunE: Like Run, but returns an error.
+ 	RunE func(cmd *Command, args []string) error
+ 	// PostRun: run after the Run command.
+ 	PostRun func(cmd *Command, args []string)
+-	// PostRunE: PostRun but returns an error.
++	// PostRunE: Like PostRun, but returns an error.
+ 	PostRunE func(cmd *Command, args []string) error
+ 	// PersistentPostRun: children of this command will inherit and execute after PostRun.
+ 	PersistentPostRun func(cmd *Command, args []string)
+-	// PersistentPostRunE: PersistentPostRun but returns an error.
++	// PersistentPostRunE: Like PersistentPostRun, but returns an error.
+ 	PersistentPostRunE func(cmd *Command, args []string) error
+ 
+ 	// groups for subcommands

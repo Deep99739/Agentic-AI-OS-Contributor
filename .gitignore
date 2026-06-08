@@ -38,3 +38,4 @@ llm_handoff_context/
 # Large binaries
 *.tar.gz
 test_results/
+DEFENSE_IN_DEPTH_ARCHITECTURE.md

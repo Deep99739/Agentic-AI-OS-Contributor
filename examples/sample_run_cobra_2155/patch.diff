@@ -1,0 +1,18 @@
+diff --git a/command.go b/command.go
+index 2fbe6c1..4bc805b 100644
+--- a/command.go
++++ b/command.go
+@@ -1069,6 +1069,13 @@ func (c *Command) ExecuteC() (cmd *Command, err error) {
+ 	// initialize completion at the last point to allow for user overriding
+ 	c.InitDefaultCompletionCmd()
+ 
++	// Configure the help command to ignore unknown flags.
++	// This allows `prog help sub --myflag` to work correctly,
++	// as `--myflag` is intended for `sub` and not `help`.
++	if c.helpCommand != nil {
++		c.helpCommand.FParseErrWhitelist.UnknownFlags = true
++	}
++
+ 	// Now that all commands have been created, let's make sure all groups
+ 	// are properly created also
+ 	c.checkCommandGroups()

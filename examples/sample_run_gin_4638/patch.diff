@@ -1,0 +1,66 @@
+diff --git a/response_writer.go b/response_writer.go
+index 9035e6f..a61b7c1 100644
+--- a/response_writer.go
++++ b/response_writer.go
+@@ -117,12 +117,18 @@ func (w *responseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
+ 	if w.size < 0 {
+ 		w.size = 0
+ 	}
+-	return w.ResponseWriter.(http.Hijacker).Hijack()
++	if hj, ok := w.ResponseWriter.(http.Hijacker); ok {
++		return hj.Hijack()
++	}
++	return nil, nil, http.ErrNotSupported
+ }
+ 
+ // CloseNotify implements the http.CloseNotifier interface.
+ func (w *responseWriter) CloseNotify() <-chan bool {
+-	return w.ResponseWriter.(http.CloseNotifier).CloseNotify()
++	if cn, ok := w.ResponseWriter.(http.CloseNotifier); ok {
++		return cn.CloseNotify()
++	}
++	return nil
+ }
+ 
+ // Flush implements the http.Flusher interface.
+diff --git a/response_writer_test.go b/response_writer_test.go
+index dfc1d2c..6172364 100644
+--- a/response_writer_test.go
++++ b/response_writer_test.go
+@@ -15,9 +15,6 @@ import (
+ 	"github.com/stretchr/testify/require"
+ )
+ 
+-// TODO
+-// func (w *responseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
+-// func (w *responseWriter) CloseNotify() <-chan bool {
+ // func (w *responseWriter) Flush() {
+ 
+ var (
+@@ -113,16 +110,18 @@ func TestResponseWriterHijack(t *testing.T) {
+ 	writer.reset(testWriter)
+ 	w := ResponseWriter(writer)
+ 
+-	assert.Panics(t, func() {
+-		_, _, err := w.Hijack()
+-		require.NoError(t, err)
+-	})
+-	assert.True(t, w.Written())
++	// Test Hijack when underlying writer does not implement http.Hijacker
++	conn, rw, err := w.Hijack()
++	assert.Nil(t, conn)
++	assert.Nil(t, rw)
++	assert.ErrorIs(t, err, http.ErrNotSupported)
++	assert.True(t, w.Written()) // Hijack still marks as written, even if not supported
+ 
+-	assert.Panics(t, func() {
+-		w.CloseNotify()
+-	})
++	// Test CloseNotify when underlying writer does not implement http.CloseNotifier
++	ch := w.CloseNotify()
++	assert.Nil(t, ch)
+ 
++	// Flush should still work without panic
+ 	w.Flush()
+ }
+ 

@@ -1,0 +1,16 @@
+{
+  "url": "https://github.com/go-playground/validator/issues/1475",
+  "owner": "go-playground",
+  "repo_name": "validator",
+  "repo_url": "https://github.com/go-playground/validator.git",
+  "number": 1475,
+  "title": "[Bug]: e164 validation allows phone codes starting with +0",
+  "body": "### What happened?\n\nExpected: validation error, phone codes starting with +0 are not allowed.\nActual: no error.\n\n### Version\n\nv10.28.0\n\n### Example Code\n\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\tvalidator \"github.com/go-playground/validator/v10\"\n)\n\nfunc main() {\n\tv := validator.New(validator.WithRequiredStructEnabled())\n\terr := v.Var(\"+0123456789\", \"e164\")\n\tfmt.Println(err)\n}\n```",
+  "labels": [
+    "bug"
+  ],
+  "comments": [
+    "**@sashayakovtseva**: I confirm this is fixed on master. Waiting for new validator release.",
+    "**@zemzale**: Released in [v10.29.0](https://github.com/go-playground/validator/releases/tag/v10.29.0)"
+  ]
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "candidate_index": 0,
+    "score": 0,
+    "error": "Failed to apply patches to source files"
+  },
+  {
+    "gofmt": {
+      "passed": true,
+      "output": "ok"
+    },
+    "build": {
+      "passed": true,
+      "output": "",
+      "exit_code": 0
+    },
+    "vet": {
+      "passed": true,
+      "output": "",
+      "exit_code": 0
+    },
+    "test": {
+      "passed": true,
+      "output": "ok  \tgithub.com/spf13/cobra\t2.277s\nok  \tgithub.com/spf13/cobra/doc\t1.406s\n",
+      "exit_code": 0
+    },
+    "score": 10,
+    "candidate_index": 2
+  }
+]

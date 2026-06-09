@@ -169,9 +169,23 @@ def apply_patches(repo_path: str, patches: list) -> list:
         msg = f"Search text not found in {patch['file']}"
         results.append({"file": patch["file"], "applied": False, "error": msg})
         log.warning(f"  ❌ Could not apply patch to {patch['file']}: search text not found")
-        # Log first 3 lines of search text for debugging
-        search_preview = "\n".join(search_text.split("\n")[:3])
-        log.debug(f"    Search text preview: {search_preview}")
+        # Log search text for debugging
+        search_preview = search_text.split("\n")[:5]
+        log.warning(f"    SEARCH text ({len(search_text)} chars, {len(search_text.split(chr(10)))} lines):")
+        for sl in search_preview:
+            log.warning(f"      |{sl}|")
+        # Log first matching attempt in file
+        first_search_line = search_text.split("\n")[0].strip()
+        content_lines = content.split("\n")
+        for ci, cl in enumerate(content_lines):
+            if first_search_line and first_search_line in cl:
+                log.warning(f"    First search line found at file line {ci+1}:")
+                log.warning(f"      FILE: |{cl}|")
+                log.warning(f"      SRCH: |{search_text.split(chr(10))[0]}|")
+                if ci+1 < len(content_lines) and len(search_text.split("\n")) > 1:
+                    log.warning(f"      FILE+1: |{content_lines[ci+1]}|")
+                    log.warning(f"      SRCH+1: |{search_text.split(chr(10))[1]}|")
+                break
 
     return results
 

@@ -1,0 +1,25 @@
+[
+  {
+    "gofmt": {
+      "passed": true,
+      "output": "formatted (auto-fixed)"
+    },
+    "build": {
+      "passed": true,
+      "output": "",
+      "exit_code": 0
+    },
+    "vet": {
+      "passed": true,
+      "output": "",
+      "exit_code": 0
+    },
+    "test": {
+      "passed": true,
+      "output": "ok  \tgithub.com/go-playground/validator/v10\t1.197s\nok  \tgithub.com/go-playground/validator/v10/non-standard/validators\t0.614s\nok  \tgithub.com/go-playground/validator/v10/translations/ar\t1.646s\nok  \tgithub.com/go-playground/validator/v10/translations/de\t2.090s\nok  \tgithub.com/go-playground/validator/v10/translations/en\t2.519s\nok  \tgithub.com/go-playground/validator/v10/translations/es\t3.907s\nok  \tgithub.com/go-playground/validator/v10/translations/fa\t4.848s\nok  \tgithub.com/go-playground/validator/v10/translations/fr\t3.441s\nok  \tgithub.com/go-playground/validator/v10/translations/id\t2.985s\nok  \tgithub.com/go-playground/validator/v10/translations/it\t4.375s\nok  \tgithub.com/go-playground/validator/v10/translations/ja\t4.579s\nok  \tgithub.com/go-playground/validator/v10/translations/ko\t4.479s\nok  \tgithub.com/go-playground/validator/v10/translations/lv\t4.454s\nok  \tgithub.com/go-playground/validator/v10/translations/nl\t4.530s\nok  \tgithub.com/go-playground/validator/v10/translations/pl\t4.517s\nok  \tgithub.com/go-playground/validator/v10/translations/pt\t4.512s\nok  \tgithub.com/go-playground/validator/v10/translations/pt_BR\t4.533s\nok  \tgithub.com/go-playground/validator/v10/translations/ru\t4.526s\nok  \tgithub.com/go-playground/validator/v10/translations/th\t4.537s\nok  \tgithub.com/go-playground/validator/v10/translations/tr\t4.541s\nok  \tgithub.com/go-playground/validator/v10/translations/uk\t4.496s\nok  \tgithub.com/go-playground/validator/v10/translations/vi\t4.495s\nok  \tgithub.com/go-playground/validator/v10/translations/zh\t4.496s\nok  \tgithub.com/go-playground/validator/v10/translations/zh_tw\t4.476s\n",
+      "exit_code": 0
+    },
+    "score": 10,
+    "candidate_index": 2
+  }
+]

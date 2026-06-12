@@ -1,0 +1,28 @@
+diff --git a/baked_in.go b/baked_in.go
+index 0ae59f0..0f4ba92 100644
+--- a/baked_in.go
++++ b/baked_in.go
+@@ -275,14 +275,23 @@ func parseOneOfParam2(s string) []string {
+ }
+ 
+ func isURLEncoded(fl FieldLevel) bool {
++	if fl.Field().Kind() != reflect.String {
++		return false
++	}
+ 	return uRLEncodedRegex().MatchString(fl.Field().String())
+ }
+ 
+ func isHTMLEncoded(fl FieldLevel) bool {
++	if fl.Field().Kind() != reflect.String {
++		return false
++	}
+ 	return hTMLEncodedRegex().MatchString(fl.Field().String())
+ }
+ 
+ func isHTML(fl FieldLevel) bool {
++	if fl.Field().Kind() != reflect.String {
++		return false
++	}
+ 	return hTMLRegex().MatchString(fl.Field().String())
+ }
+ 

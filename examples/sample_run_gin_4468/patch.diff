@@ -1,0 +1,13 @@
+diff --git a/context.go b/context.go
+index e1d9be4..fc6c851 100644
+--- a/context.go
++++ b/context.go
+@@ -1023,7 +1023,7 @@ func (c *Context) IsWebsocket() bool {
+ }
+ 
+ func (c *Context) requestHeader(key string) string {
+-	return c.Request.Header.Get(key)
++	return strings.Join(c.Request.Header.Values(key), ",")
+ }
+ 
+ /************************************/

@@ -1,0 +1,25 @@
+[
+  {
+    "gofmt": {
+      "passed": true,
+      "output": "ok"
+    },
+    "build": {
+      "passed": true,
+      "output": "",
+      "exit_code": 0
+    },
+    "vet": {
+      "passed": true,
+      "output": "",
+      "exit_code": 0
+    },
+    "test": {
+      "passed": true,
+      "output": "ok  \tgithub.com/gin-gonic/gin\t0.868s\nok  \tgithub.com/gin-gonic/gin/binding\t1.200s\n?   \tgithub.com/gin-gonic/gin/codec/json\t[no test files]\nok  \tgithub.com/gin-gonic/gin/ginS\t1.659s\nok  \tgithub.com/gin-gonic/gin/internal/bytesconv\t2.069s\nok  \tgithub.com/gin-gonic/gin/internal/fs\t2.516s\nok  \tgithub.com/gin-gonic/gin/render\t3.038s\n",
+      "exit_code": 0
+    },
+    "score": 10,
+    "candidate_index": 0
+  }
+]

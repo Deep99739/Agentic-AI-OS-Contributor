@@ -60,9 +60,9 @@ class LLMClient:
         if not self.fallback_models:
             # Auto-configure fallbacks based on primary model
             if "gemini-2.5" in self.model:
-                self.fallback_models = ["gemini/gemini-1.5-flash"]
+                self.fallback_models = ["gemini/gemini-2.0-flash"]
             elif "groq" in self.model:
-                self.fallback_models = ["gemini/gemini-1.5-flash"]
+                self.fallback_models = ["gemini/gemini-2.0-flash"]
 
         if litellm is None:
             raise ImportError(

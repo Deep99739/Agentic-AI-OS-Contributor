@@ -100,10 +100,30 @@ class Localizer:
         condensed = ""
         for fpath, content in file_contents.items():
             condensed += f"\n\n--- FILE: {fpath} ---\n"
-            # Add line numbers for precise element identification
             lines = content.split("\n")
-            numbered = "\n".join(f"{i+1:4d}: {line}" for i, line in enumerate(lines[:300]))
-            condensed += numbered
+
+            if len(lines) <= 500:
+                # Small file — show everything with line numbers
+                numbered = "\n".join(f"{i+1:4d}: {line}" for i, line in enumerate(lines))
+                condensed += numbered
+            else:
+                # Large file — show function index + first 300 lines
+                # This prevents the critical bug where functions beyond line 300
+                # are invisible to the localizer (e.g., argsMinusFirstX at line 658
+                # in command.go was never seen, causing the LLM to target Traverse)
+                log.info(f"  Element localization: {fpath} has {len(lines)} lines — using function index")
+
+                # Build function index: show all func signatures with line numbers
+                func_index = "FUNCTION INDEX (all functions in this file):\n"
+                for i, line in enumerate(lines):
+                    stripped = line.strip()
+                    if stripped.startswith("func ") or stripped.startswith("func("):
+                        func_index += f"  Line {i+1:4d}: {stripped[:120]}\n"
+                condensed += func_index + "\n"
+
+                # Show first 300 lines (package, imports, types, early functions)
+                numbered = "\n".join(f"{i+1:4d}: {line}" for i, line in enumerate(lines[:300]))
+                condensed += "FIRST 300 LINES:\n" + numbered
 
         prompt = ELEMENT_LOCALIZATION_PROMPT.format(
             issue_title=issue_data["title"],

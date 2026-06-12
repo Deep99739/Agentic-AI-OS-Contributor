@@ -62,4 +62,78 @@ If you need to edit multiple files, repeat the pattern for each file.
 - If the fix requires adding new functions, show them in a SEARCH/REPLACE where the SEARCH is the area just before where the new code should go.
 - CRITICAL: Your fix MUST pass ALL existing tests in the repository. If the existing test suite expects certain inputs to be valid, your fix must preserve that behavior. Do not break backward compatibility.
 - REGEX FIX CHECKLIST: If your fix modifies a regex, you MUST mentally verify EACH test case input against your new regex pattern before producing the final patch. Walk through character by character. If a test input like "0 0 12 * * ?" contains a character your regex doesn't support (like ?), you MUST expand the regex character classes to support it.
+
+## DISAMBIGUATION RULES (for large files with repeated patterns)
+- FUNCTION ANCHORING: When the file has multiple similar code patterns (e.g., multiple switch-case blocks, multiple if-blocks with similar structure), ALWAYS include the function signature line (e.g., `func functionName(...)`) as the FIRST line of your SEARCH block. This ensures the patch applies to the CORRECT function instance, not a duplicate pattern in a different function.
+- NEVER INVENT CODE: Only use text that appears VERBATIM in the Current Source Code section above. Do NOT assume, guess, or fabricate surrounding context. Copy the code exactly as shown, character-by-character. If you are unsure what the surrounding code looks like, include MORE context lines from the source, not fewer.
+- UNIQUE CONTEXT: If the target code pattern appears multiple times in the file, expand your SEARCH block to include enough surrounding lines (including the function signature) to make the match unique.
+
+## OUTPUT FORMAT ENFORCEMENT
+- You MUST output SEARCH/REPLACE blocks. Do NOT output only analysis or explanation.
+- If you need to reason about the fix, limit your analysis to 3-4 sentences MAXIMUM, then immediately produce the SEARCH/REPLACE block(s).
+- Your response MUST contain at least one <<<<<<< SEARCH marker. Responses without SEARCH/REPLACE blocks are REJECTED.
+"""
+
+# ──────────────────────────────────────────────────────────────────────
+# Two-Call Architect/Editor Approach (fallback for complex issues)
+# Inspired by:
+#   - Aider's Architect/Editor mode (separate planning from editing)
+#   - Agentless's "localize then fix" pipeline
+#   - SWE-agent's Thought/Action separation
+#   - OpenHands's "plan first, then edit" workflow
+# ──────────────────────────────────────────────────────────────────────
+
+PLAN_PROMPT = """You are an expert Go developer. Analyze this GitHub issue and produce a CONCISE fix plan.
+
+## GitHub Issue
+**Title**: {issue_title}
+**Description**:
+{issue_body}
+
+## Analysis of What Needs to Change
+{element_analysis}
+
+## Current Source Code
+{file_contents}
+
+## Instructions
+Produce a fix plan in EXACTLY this format (keep it under 200 words):
+
+1. ROOT CAUSE: [One sentence explaining why the bug happens]
+2. FIX LOCATION: [Exact file and function name where the fix goes. IMPORTANT: Don't just pick the most obvious function — consider helper functions, callees, and utility functions that the main function delegates to. The fix often belongs in a HELPER function, not the top-level entry point.]
+3. FIX STRATEGY: [2-3 sentences describing what code changes to make. Focus on the MINIMAL change needed.]
+4. SEARCH ANCHOR: [Copy the EXACT first line of code you will target in the SEARCH block, verbatim from the source above]
+
+Do NOT write any code. Do NOT produce SEARCH/REPLACE blocks. Only produce the plan above.
+"""
+
+EDITOR_PROMPT = """You are a code editor. You receive a fix plan and source code. Your ONLY job is to output SEARCH/REPLACE blocks. Do NOT analyze, explain, or reason. Output ONLY the edit blocks.
+
+## Fix Plan
+{fix_plan}
+
+## Current Source Code
+{file_contents}
+
+## Test Cases (your fix MUST pass ALL of these)
+{relevant_test_cases}
+
+## Rules
+1. Output ONLY SEARCH/REPLACE blocks. No analysis. No explanations. No preambles.
+2. The SEARCH text must EXACTLY match the current source code character-by-character.
+3. Use tabs for Go indentation.
+4. Include the function signature in SEARCH if the target pattern is repeated.
+5. Keep changes minimal and surgical.
+
+## Output Format
+path/to/file.go
+```go
+<<<<<<< SEARCH
+exact existing code
+=======
+replacement code
+>>>>>>> REPLACE
+```
+
+BEGIN OUTPUT NOW:
 """
